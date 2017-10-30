@@ -4,4 +4,4 @@ echo -e "Please make sure all needed resource is provisioned, and type y to cont
 read input
 echo "Starting script"
 
-sudo yum update -y
+yum update -y
