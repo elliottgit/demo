@@ -1,0 +1,43 @@
+#!/bin/bash
+# Title: Oracle Cloud Infrastructure Workshop
+# Creator: Elliott Ning, Cloud Specialist Soution Consultant
+# Version: 1.0
+# Date: 10/30/2017
+
+echo "Type y to make sure all necessary resource have been provisioned"
+read input
+echo "Starting script"
+
+# === Step 1: Download and install WordPress and dependencies ===
+
+# Enable MySQL repo and install software for MySQL-server
+sudo yum-config-manager --enable ol7_MySQL56
+
+# Install software for webserver
+sudo yum install httpd -y
+
+# Enable firewall to have these ports 80 / 443 added; start and enable webserver
+sudo firewall-cmd --permanent --add-port=80/tcp
+sudo firewall-cmd --permanent --add-port=443/tcp
+sudo firewall-cmd --reload
+sudo systemctl start httpd
+sudo systemctl enable httpd
+
+# Install software for PHP
+sudo yum install php php-mysql php-pdo php-gd php-xml –y
+sudo systemctl restart httpd.service
+
+# Enable MySQL repo and install software for MySQL-server
+sudo yum install mysql mysql-server -y
+
+# Start and enable mysqld
+sudo systemctl start mysqld
+sudo systemctl enable mysqld
+
+# Get the latest tar ball from wordpress.org and untar the package
+cd /var/www/html/
+sudo yum install wget -y
+sudo wget http://wordpress.org/latest.tar.gz
+sudo tar zxvf latest.tar.gz
+sudo chown -R apache:apache /var/www/html/*
+
