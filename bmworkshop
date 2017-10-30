@@ -1,8 +1,9 @@
-#!/bin/bash
 # Title: Oracle Cloud Infrastructure Workshop
 # Creator: Elliott Ning, Cloud Specialist Soution Consultant
 # Version: 1.0
 # Date: 10/30/2017
+
+#!/bin/bash
 
 echo "Type y to make sure all necessary resource have been provisioned"
 read input
