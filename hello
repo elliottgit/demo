@@ -13,8 +13,7 @@ echo "Starting script"
 yum-config-manager --enable ol7_MySQL56
 
 #Download wget for pulling an image from a web page
-yum update -y
-yum install wget -y
+#yum update -y
 
 #Install software for webserver
 yum install httpd -y
