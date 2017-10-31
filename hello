@@ -8,35 +8,35 @@ echo -e "Please make sure all needed resource is provisioned, and type y to cont
 read input
 echo "Starting script"
 
-#Step1: Download and install WordPress and dependencies
-#Enable MySQL repo and install software for MySQL-server
+echo "Step1: Download and install WordPress and dependencies"
+echo "Enable MySQL repo and install software for MySQL-server"
 yum-config-manager --enable ol7_MySQL56
 
-#Download wget for pulling an image from a web page
+#echo "Update OS"
 #yum update -y
 
-#Install software for webserver
+echo "Install software for webserver"
 yum install httpd -y
 
-#Enable firewall to have these ports 80 / 443 added; start and enable webserver
+echo "Enable firewall to have these ports 80 / 443 added; start and enable webserver"
 firewall-cmd --permanent --add-port=80/tcp
 firewall-cmd --permanent --add-port=443/tcp
 firewall-cmd --reload
 systemctl start httpd
 systemctl enable httpd
 
-#Install software for PHP
+echo "Install software for PHP"
 yum install php php-mysql php-pdo php-gd php-xml –y
 systemctl restart httpd.service
 
-#Enable MySQL repo and install software for MySQL-server
+echo "Enable MySQL repo and install software for MySQL-server"
 yum install mysql mysql-server -y
 
-#Start and enable mysqld
+echo "Start and enable mysqld"
 systemctl start mysqld
 systemctl enable mysqld
 
-#Get the latest tar ball from wordpress.org and untar the package
+echo "Get the latest tar ball from wordpress.org and untar the package"
 cd /var/www/html/
 wget http://wordpress.org/latest.tar.gz
 tar zxvf latest.tar.gz
