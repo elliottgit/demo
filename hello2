@@ -1,0 +1,9 @@
+echo "Step 2: Create MySQL Database and configure WordPress"
+echo "Configure MySQL database"
+mysql_secure_installation
+expect "Current Password: "
+send "\r"
+expect "Set Password: "
+send "Y\r"
+expect "Password:"
+send "password\r"
