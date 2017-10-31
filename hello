@@ -1,7 +1,17 @@
 #!/bin/bash
+#Creator: Elliott Ning - Oracle Cloud Specialist Consultant
+#Version: 1.0
+#Date: 10/31/2017
 
+#Step0: Check provisioned resource
 echo -e "Please make sure all needed resource is provisioned, and type y to continue"
 read input
 echo "Starting script"
 
+#Step1: Download and install WordPress and dependencies
+#Enable MySQL repo and install software for MySQL-server
+yum-config-manager --enable ol7_MySQL56
+
+#Download wget for pulling an image from a web page
 yum update -y
+yum install wget -y
