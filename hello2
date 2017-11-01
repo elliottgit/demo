@@ -1,3 +1,4 @@
+#!/bin/bash
 #!/usr/bin/expect -f
 
 #yum install expect
