@@ -26,6 +26,3 @@ fi
 $MYSQL -uroot -p -e "$SQL"
 
 ok "Database $1 and user $2 created with a password $3"
-
-EOF
-
