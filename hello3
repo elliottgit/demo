@@ -7,8 +7,10 @@ mysql_secure_installation
 echo "Create Database for WordPress"
 mysql -u root -p
 
-mysql -e "CREATE DATABASE wordpress;"
-mysql -e "CREATE USER wordpressuser@localhost IDENTIFIED BY 'password';"
-mysql -e "GRANT ALL PRIVILEGES ON wordpress.* TO wordpressuser@localhost IDENTIFIED BY 'password';"
-mysql -e "FLUSH PRIVILEGES;"
-mysql -e "EXIT"
+<<MYSQL_SCRIPT
+CREATE DATABASE wordpress;
+CREATE USER wordpressuser@localhost IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON wordpress.* TO wordpressuser@localhost IDENTIFIED BY 'password';
+FLUSH PRIVILEGES;
+EXIT
+MYSQL_SCRIPT
