@@ -1,6 +1,6 @@
 #!/usr/bin/expect -f
 
-yum install expect
+#yum install expect
 
 echo "Step 2: Create MySQL Database and configure WordPress"
 echo "Configure MySQL database"
