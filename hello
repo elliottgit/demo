@@ -41,3 +41,14 @@ cd /var/www/html/
 wget http://wordpress.org/latest.tar.gz
 tar zxvf latest.tar.gz
 chown -R apache:apache /var/www/html/*
+
+echo "Step 2: Create MySQL Database and configure WordPress"
+echo "Configure MySQL database"
+mysql_secure_installation
+
+echo "Create Database for WordPress"
+mysql -u root -p
+
+echo "Configure WordPress to use the MySQL database"
+cp wordpress/wp-config-sample.php wp-config.php
+vi wp-config.php
