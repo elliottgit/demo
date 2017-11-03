@@ -12,8 +12,8 @@ echo "Step1: Download and install WordPress and dependencies"
 echo "Enable MySQL repo and install software for MySQL-server"
 yum-config-manager --enable ol7_MySQL56
 
-#echo "Update OS"
-#yum update -y
+echo "Update OS"
+yum update -y
 
 echo "Install software for webserver"
 yum install httpd -y
