@@ -44,7 +44,17 @@ chown -R apache:apache /var/www/html/*
 
 echo "Step 2: Create MySQL Database and configure WordPress"
 echo "Configure MySQL database"
-mysql_secure_installation
+#mysql_secure_installation
+# Make sure that NOBODY can access the server without a password
+mysql -e "UPDATE mysql.user SET Password = PASSWORD('password') WHERE User = 'root'"
+# Kill the anonymous users
+mysql -e "DROP USER ''@'localhost'"
+# Because our hostname varies we'll use some Bash magic here.
+mysql -e "DROP USER ''@'$(hostname)'"
+# Kill off the demo database
+mysql -e "DROP DATABASE test"
+# Make our changes take effect
+mysql -e "FLUSH PRIVILEGES"
 
 echo "Create Database for WordPress"
 mysql -uroot -ppassword -e "CREATE DATABASE wordpress"
@@ -54,4 +64,6 @@ mysql -uroot -ppassword -e "FLUSH PRIVILEGES"
 
 echo "Configure WordPress to use the MySQL database"
 cp wordpress/wp-config-sample.php wp-config.php
-vi wp-config.php
+sed -i 's/database_name_here/wordpress/g' wp-config.php
+sed -i 's/username_here/wordpressuser/g' wp-config.php
+sed -i 's/password_here/password/g' wp-config.php
