@@ -26,7 +26,7 @@ systemctl start httpd
 systemctl enable httpd
 
 echo "Install software for PHP"
-yum install php php-mysql php-pdo php-gd php-xml –y
+yes | yum install php php-mysql php-pdo php-gd php-xml –y
 systemctl restart httpd.service
 
 echo "Enable MySQL repo and install software for MySQL-server"
