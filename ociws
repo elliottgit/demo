@@ -12,8 +12,8 @@ echo "Step1: Download and install WordPress and dependencies"
 echo "Enable MySQL repo and install software for MySQL-server"
 yum-config-manager --enable ol7_MySQL56
 
-echo "Update OS"
-yum update -y
+#echo "Update OS"
+#yum update -y
 
 echo "Install software for webserver"
 yum install httpd -y
@@ -47,7 +47,13 @@ echo "Configure MySQL database"
 mysql_secure_installation
 
 echo "Create Database for WordPress"
-mysql -u root -p
+mysql -uroot -ppassword -e "CREATE DATABASE wordpress"
+mysql -uroot -ppassword -e "CREATE USER wordpressuser@localhost IDENTIFIED BY 'password'"
+mysql -uroot -ppassword -e "GRANT ALL PRIVILEGES ON wordpress.* TO wordpressuser@localhost IDENTIFIED BY 'password'"
+mysql -uroot -ppassword -e "FLUSH PRIVILEGES"
+
+cp wordpress/wp-config-sample.php wp-config.php
+vi wp-config.php
 
 echo "Configure WordPress to use the MySQL database"
 cp wordpress/wp-config-sample.php wp-config.php
