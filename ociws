@@ -52,9 +52,6 @@ mysql -uroot -ppassword -e "CREATE USER wordpressuser@localhost IDENTIFIED BY 'p
 mysql -uroot -ppassword -e "GRANT ALL PRIVILEGES ON wordpress.* TO wordpressuser@localhost IDENTIFIED BY 'password'"
 mysql -uroot -ppassword -e "FLUSH PRIVILEGES"
 
-cp wordpress/wp-config-sample.php wp-config.php
-vi wp-config.php
-
 echo "Configure WordPress to use the MySQL database"
 cp wordpress/wp-config-sample.php wp-config.php
 vi wp-config.php
