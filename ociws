@@ -2,7 +2,7 @@
 
 echo "Creator: Elliott Ning - Oracle Cloud Specialist Consultant"
 echo "Version: 1.02"
-echo "Date: 10/31/2017"
+echo "Date: 11/06/2017"
 
 #Step0: Check provisioned resource
 echo -e "Please make sure all needed resource is provisioned, and type y to continue:"
