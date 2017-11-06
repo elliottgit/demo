@@ -73,7 +73,7 @@ sed -i 's/database_name_here/wordpress/g' wp-config.php
 sed -i 's/username_here/wordpressuser/g' wp-config.php
 sed -i 's/password_here/password/g' wp-config.php
 
-echo "Enter the URL below in your browser to complete the workshop"
+echo "Enter the URL below in your browser to complete the workshop:"
 IP=`wget http://ipecho.net/plain -O - -q ; echo`
 echo "http://$IP/wordpress/wp-admin/install.php"
 
