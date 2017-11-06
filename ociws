@@ -1,10 +1,11 @@
 #!/bin/bash
-#Creator: Elliott Ning - Oracle Cloud Specialist Consultant
-#Version: 1.0
-#Date: 10/31/2017
+
+echo "Creator: Elliott Ning - Oracle Cloud Specialist Consultant"
+echo "Version: 1.02"
+echo "Date: 10/31/2017"
 
 #Step0: Check provisioned resource
-echo -e "Please make sure all needed resource is provisioned, and type y to continue"
+echo -e "Please make sure all needed resource is provisioned, and type y to continue:"
 read input
 echo "Starting script"
 
@@ -45,20 +46,24 @@ chown -R apache:apache /var/www/html/*
 echo "Step 2: Create MySQL Database and configure WordPress"
 echo "Configure MySQL database"
 #mysql_secure_installation
+echo "Resetting MySQL root password"
 mysql -e "UPDATE mysql.user SET Password = PASSWORD('password') WHERE User = 'root'"
-# Kill the anonymous users
+echo "Removing MySQL anonymous users"
 mysql -e "DROP USER ''@'localhost'"
 # Because our hostname varies we'll use some Bash magic here.
 mysql -e "DROP USER ''@'$(hostname)'"
-# Kill off the demo database
+echo "Removing MySQL test database"
 mysql -e "DROP DATABASE test"
-# Make our changes take effect
+echo "Take effect of configurations"
 mysql -e "FLUSH PRIVILEGES"
 
 echo "Create Database for WordPress"
 mysql -uroot -ppassword -e "CREATE DATABASE wordpress"
+echo "Create User wordpressuser for Database WordPress"
 mysql -uroot -ppassword -e "CREATE USER wordpressuser@localhost IDENTIFIED BY 'password'"
+echo "Grant privileges to User wordpressuser"
 mysql -uroot -ppassword -e "GRANT ALL PRIVILEGES ON wordpress.* TO wordpressuser@localhost IDENTIFIED BY 'password'"
+echo "Take effect of creations"
 mysql -uroot -ppassword -e "FLUSH PRIVILEGES"
 echo "Database wordpress User wordpressuser has been created"
 
