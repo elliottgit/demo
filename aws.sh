@@ -28,6 +28,7 @@ systemctl restart httpd.service
 
 echo "Enable MySQL repo and install software for MySQL-server"
 yes | yum localinstall https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
+yes | yum install mysql-community-server
 
 echo "Start and enable mysqld"
 systemctl start mysqld
