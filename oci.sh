@@ -9,6 +9,8 @@ echo -e "Please make sure all needed resource is provisioned, and type y to cont
 read input
 echo "Starting script"
 
+yum-config-manager --enable ol7_MySQL56
+
 echo "Update OS"
 yum update -y
 
@@ -27,8 +29,7 @@ yes | yum install php php-mysql php-pdo php-gd php-xml –y
 systemctl restart httpd.service
 
 echo "Enable MySQL repo and install software for MySQL-server"
-yes | yum localinstall https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
-yes | yum install mysql-community-server
+yum install mysql mysql-server -y
 
 echo "Start and enable mysqld"
 systemctl start mysqld
