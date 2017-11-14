@@ -31,7 +31,7 @@ yes | yum localinstall https://dev.mysql.com/get/mysql57-community-release-el7-1
 yes | yum install mysql-community-server
 
 echo "Start and enable mysqld"
-systemctl start mysqld
+service mysqld start
 systemctl enable mysqld
 
 echo "Get the latest tar ball from wordpress.org and untar the package"
@@ -44,7 +44,7 @@ echo "Step 2: Create MySQL Database and configure WordPress"
 echo "Configure MySQL database"
 #mysql_secure_installation
 echo "Resetting MySQL root password"
-mysql -e "UPDATE mysql.user SET Password = PASSWORD('password') WHERE User = 'root'"
+mysqladmin -e "UPDATE mysql.user SET Password = PASSWORD('password') WHERE User = 'root'"
 echo "Removing MySQL anonymous users"
 mysql -e "DROP USER ''@'localhost'"
 # Because our hostname varies we'll use some Bash magic here.
