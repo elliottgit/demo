@@ -49,12 +49,8 @@ then
 
   echo "download content"
   cd /var/www/html/
-  wget http://wordpress.org/latest.tar.gz
+  wget https://raw.githubusercontent.com/elliottgit/demo/master/index.html
   chown -R apache:apache /var/www/html/*
-
-  echo "Configure WordPress to use the MySQL database"
-  cp wordpress/wp-config-sample.php wp-config.php
-  sed -i 's/database_name_here/wordpress/g' wp-config.php
 
   echo "Enter the URL below in your browser to see the website:"
   IP=`wget http://ipecho.net/plain -O - -q ; echo`
