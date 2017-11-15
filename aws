@@ -28,7 +28,7 @@ then
 
   echo "Mount volume on every system reboot"
   sudo cp /etc/fstab /etc/fstab.orig
-  sed -i -e '$blockuuid /ebsvolume ext4 defaults,nofail 0 2' /etc/fstab
+  echo '$blockuuid /ebsvolume ext4 defaults,nofail 0 2' >> /etc/fstab
   cd /ebsvolume
 
   echo "Update system..."
@@ -37,6 +37,8 @@ then
 
   echo "Install software for webserver."
   yum -y install httpd
+
+
 
   echo "Enable firewall to have ports 80 / 443 opened; start and enable webserver."
   firewall-cmd --permanent --add-port=80/tcp
