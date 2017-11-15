@@ -1,21 +1,22 @@
 #!/bin/bash
 
-echo "Creator: Elliott Ning - Oracle Cloud Specialist Consultant"
+echo "Creator: Elliott Ning - AWS Work Sample on RHEL 7"
 echo "Version: 1.01"
 echo "Date: 11/13/2017"
 
 #Step0: Check provisioned resource
-echo -e "Please make sure all needed resource is provisioned, and type y to continue:"
+echo -e "Type y to start the script:"
 read input
 echo "Starting script"
 
 echo "Update OS"
-yum update -y
+yum -y update
+yum -y install yum-utils
 
 echo "Install software for webserver"
-yum install httpd -y
+yum -y install httpd
 
-echo "Enable firewall to have these ports 80 / 443 added; start and enable webserver"
+echo "Enable firewall to have ports 80 / 443 opened; start and enable webserver"
 firewall-cmd --permanent --add-port=80/tcp
 firewall-cmd --permanent --add-port=443/tcp
 firewall-cmd --reload
@@ -23,15 +24,21 @@ systemctl start httpd
 systemctl enable httpd
 
 echo "Install software for PHP"
-yes | yum install php php-mysql php-pdo php-gd php-xml –y
+yum -y install php php-mysql php-pdo php-gd php-xml
 systemctl restart httpd.service
 
 echo "Enable MySQL repo and install software for MySQL-server"
-yes | yum localinstall https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
-yes | yum install mysql-community-server
+yum -y localinstall https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
+
+yum-config-manager --disable mysql57-community
+yum-config-manager --enable mysql56-community
+
+yum -y install mysql-community-server
+
+
 
 echo "Start and enable mysqld"
-service mysqld start
+systemctl start mysqld.service
 systemctl enable mysqld
 
 echo "Get the latest tar ball from wordpress.org and untar the package"
@@ -44,7 +51,10 @@ echo "Step 2: Create MySQL Database and configure WordPress"
 echo "Configure MySQL database"
 #mysql_secure_installation
 echo "Resetting MySQL root password"
-mysqladmin -e "UPDATE mysql.user SET Password = PASSWORD('password') WHERE User = 'root'"
+#mysql -e "UPDATE mysql.user SET Password = PASSWORD('password') WHERE User = 'root'"
+mysql -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('password')"
+
+
 echo "Removing MySQL anonymous users"
 mysql -e "DROP USER ''@'localhost'"
 # Because our hostname varies we'll use some Bash magic here.
