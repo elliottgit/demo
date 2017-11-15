@@ -21,7 +21,6 @@ echo -e "Check the EBS volume variables and type y to start the script:"
 read input
 if [ $input == 'y' ]
 then
-
   echo "Mount EBS volume."
   mkfs -t ext4 $blockdevice
   mkdir /ebsvolume
@@ -59,7 +58,6 @@ then
   echo "http://$IP"
 
 else
-
   echo "Edit the variables and try again"
 
 fi
