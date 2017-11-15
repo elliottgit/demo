@@ -59,6 +59,7 @@ then
   echo "http://$IP"
 
 else
+
   echo "Edit the variables and try again"
 
 fi
