@@ -11,27 +11,29 @@
 export blockdevice=
 export blockuuid=UUID=
 
-# display variables
-echo "device name is $blockdevice"
-echo "device uuid is $blockuuid"
-
 #==============================================================================
 
-echo -e "Check the block volume variables and type y to start the script:"
+# display variables
+echo "EBS Device name is $blockdevice"
+echo "EBS Device uuid is $blockuuid"
+
+echo -e "Check the EBS volume variables and type y to start the script:"
 read input
 if [ $input == 'y' ]
 then
 
-  echo "Mount block volume."
+  echo "Mount EBS volume."
   mkfs -t ext4 $blockdevice
-  mkdir /block
-  mount $blockdevice /block
+  mkdir /ebsvolume
+  mount $blockdevice /ebsvolume
+
+  echo "Mount volume on every system reboot"
   sudo cp /etc/fstab /etc/fstab.orig
-  sed -i -e '$blockuuid /block ext4 defaults,nofail 0 2' file
-  cd /block
+  sed -i -e '$blockuuid /ebsvolume ext4 defaults,nofail 0 2' /etc/fstab
+  cd /ebsvolume
 
   echo "Update system..."
-  yum -y update
+  #yum -y update
   yum -y install yum-utils
 
   echo "Install software for webserver."
