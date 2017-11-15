@@ -57,7 +57,6 @@ mysql -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('password')"
 
 echo "Removing MySQL anonymous users"
 mysql -e "DROP USER ''@'localhost'"
-# Because our hostname varies we'll use some Bash magic here.
 mysql -e "DROP USER ''@'$(hostname)'"
 echo "Removing MySQL test database"
 mysql -e "DROP DATABASE test"
